@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-card-service
+  labels:
+    app: credit-card-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: credit-card-service
+  template:
+    metadata:
+      labels:
+        app: credit-card-service
+    spec:
+      containers:
+        - name: credit-card-service
+          image: credit-card-service:latest    # If you're using local images (minikube/docker-desktop)
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SERVER_PORT
+              value: "8081"
