@@ -1,4 +1,4 @@
-Payment & Credit Card Microservices
+**Payment & Credit Card Microservices**
 
 A microservices-based distributed system built for COMP41720 – Distributed Systems: Architectural Principles (Lab 4).
 
@@ -10,19 +10,19 @@ Credit Card Service – manages credit card accounts and authorizes charges
 
 Communication between services is done using synchronous REST, and the system is deployed using Docker and Kubernetes.
 
-🚀 Architecture Overview
+** Architecture Overview**
 +------------------------+       REST POST       +---------------------------+
 |   Payment Service      | --------------------> |   Credit Card Service     |
 |   (Java, Spring Boot)  |   /cards/authorize    |   (Java, Spring Boot)     |
 +------------------------+                       +---------------------------+
 
-Workflow:
+**Workflow:**
 1. Payment Service receives new payment request.
 2. It calls Credit Card Service for authorization.
 3. Credit Card Service checks credit limit and returns Approved/Declined.
 4. Payment Service stores and returns the payment result.
 
-Technologies Used
+**Technologies Used**
 
 Java 17
 
@@ -34,7 +34,7 @@ Kubernetes (Minikube / Docker Desktop)
 
 Maven
 
-🧩 Project Structure
+** Project Structure**
 /
 ├── payment-service/
 │   ├── src/
@@ -52,7 +52,7 @@ Maven
         ├── credit-card-deployment.yaml
         └── credit-card-service.yaml
 
-🛠️ Setup & Installation
+**Setup & Installation**
 1. Prerequisites
 
 Ensure the following are installed:
@@ -63,11 +63,11 @@ Maven 3+
 
 Docker
 
-Minikube or Kubernetes via Docker Desktop
+ Kubernetes via Docker Desktop
 
 kubectl
 
-⚙️ Build & Run Locally
+ Build & Run Locally
 Build both services
 cd payment-service
 mvn clean package
@@ -84,7 +84,7 @@ Start Payment Service:
 cd payment-service
 mvn spring-boot:run
 
-🐳 Docker Build Instructions
+ Docker Build Instructions
 
 Build Docker images:
 
@@ -96,7 +96,7 @@ Credit Card Service:
 cd credit-card-service
 docker build -t credit-card-service .
 
-☸️ Kubernetes Deployment
+Kubernetes Deployment
 
 Start Minikube (if using Minikube):
 
@@ -118,7 +118,7 @@ Expose Payment Service:
 
 kubectl port-forward svc/payment-service 8080:8080
 
-🧪 Testing the System
+Testing the System
 1. Register a fake credit card:
 curl -X POST http://localhost:8081/cards \
      -H "Content-Type: application/json" \
@@ -140,29 +140,3 @@ Expected Response:
   "status": "AUTHORIZED"
 }
 
-🧠 Architectural Summary
-Microservices Chosen:
-
-Payment Service
-
-Credit Card Service
-
-Communication Pattern:
-
-Synchronous REST using Spring Boot’s RestTemplate
-
-Trade-Offs:
-
-Easy to implement
-
-Strong consistency (immediate result)
-
-– Runtime coupling
-
-– Sensitive to latency & failures
-
-Deployment:
-
-Docker containers
-
-Kubernetes Deployments + Services
